@@ -1,7 +1,7 @@
 # Workshop environment setup
 
 This is the first section of the AWS KMS Workshop where we will get things ready to start with the workshop.
-Please ensure you have read and understood the [prerequisites for the workshop](https://github.com/aws-samples/aws-kms-workshop#pre---requisites). 
+Please ensure you have read and understood the [prerequisites for the workshop](README.md#pre---requisites). 
 
 Especially, though AWS KMS prior knowledge is not really needed, Workshop is more meaningful if you take a look at this introduction to AWS KMS:
 
@@ -17,7 +17,7 @@ When you are ready, please follow the following steps to create all the artifact
 
 
 
-2. Download the Workshop's **CloudFormation template on the (Save Link As) [following link](https://raw.githubusercontent.com/aws-samples/aws-kms-workshop/master/res/cf-workshoptemplate.txt)**. This template will create a Role named "**KMSWorkshop-InstanceInitRole**" and an Amazon S3 bucket named "**kmsworkshop-accountid**", where accountid is the identifier of your account.
+2. Download the Workshop's **CloudFormation template on the (Save Link As) [following link](https://raw.githubusercontent.com/guikcd/aws-kms-workshop/fixes/res/cf-workshoptemplate.json)**. This template will create a Role named "**KMSWorkshop-InstanceInitRole**" and an Amazon S3 bucket named "**kmsworkshop-accountid**", where accountid is the identifier of your account.
  
 
    Go to the AWS Console, navigate to "**CloudFormation**" Service and select "**Create Stack**" as you can see in figure below:
@@ -40,7 +40,7 @@ When you are ready, please follow the following steps to create all the artifact
   Internet Gateway and update the subnet Route table.
   If you need help with these steps, make sure you check [this section of the AWS Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html).
 
-   If you need overall help with CloudFormation stacks, see [the CloudFormation documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
+   If you need overall help with CloudFormation stacks, see [the CloudFormation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
 
 
 5. Make sure the security groups associated with the instance allow it to be accessible via SSH from your IP. **NOTE:**  you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the following [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance.
@@ -55,9 +55,9 @@ If you need help with the operation, navigate to the EC2 service in the AWS cons
 
 
 
-7. Once the instance is launched and contains the Role, try to connect to it via terminal. If you need help, [check the options here](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html).
+7. Once the instance is launched and contains the Role, try to connect to it. Use [AWS Systems Manager Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#start-ec2-console) or [check the options here](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html) for additional methods.
 
 
-If you can connect to your instance then **You should now be ready to start with the workshop**, let's [Go to first section of workshop](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-1-Operating-with-AWS-KMS.md)
+If you can connect to your instance then **You should now be ready to start with the workshop**, let's [Go to first section of workshop](Section-1-Operating-with-AWS-KMS.md)
 
 

@@ -4,11 +4,11 @@ In this section, using a Web App, we are going to implement best practices for A
 These best practices are based on the Whitepaper "**[AWS Key Management Service Best Practices](https://d0.awsstatic.com/whitepapers/aws-kms-best-practices.pdf)**"
 
 this section has the following parts:
-* [Installing the Web App](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-3-Working-with-Web-App.md#installing-the-web-app)
-* [Adding Encryption to the Web App](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-3-Working-with-Web-App.md#adding-encryption-to-the-web-app)
-* [Working with Key Policies](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-3-Working-with-Web-App.md#working-with-key-policies)
-* [Key Policies and VPC Private Endpoint](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-3-Working-with-Web-App.md#vpc-endpoints-and-key-policies)
-* [AWS KMS key tagging](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-3-Working-with-Web-App.md#key-tagging)
+* [Installing the Web App](Section-3-Working-with-Web-App.md#installing-the-web-app)
+* [Adding Encryption to the Web App](Section-3-Working-with-Web-App.md#adding-encryption-to-the-web-app)
+* [Working with Key Policies](Section-3-Working-with-Web-App.md#working-with-key-policies)
+* [Key Policies and VPC Private Endpoint](Section-3-Working-with-Web-App.md#vpc-endpoints-and-key-policies)
+* [AWS KMS key tagging](Section-3-Working-with-Web-App.md#key-tagging)
 ---
 
 ### Installing the Web App
@@ -26,6 +26,7 @@ Make the new directory and install the needed boto3 python library (if not prese
 
 ```
 $ sudo mkdir SampleWebApp
+$ sudo yum -y install python-pip
 $ sudo pip install boto3
 ```
 
@@ -33,7 +34,7 @@ Now, get into the directory and download the sample WebApp with wget as stated b
 
 ```
 $ cd SampleWebApp
-$ sudo wget  https://raw.githubusercontent.com/aws-samples/aws-kms-workshop/master/WebApp.py
+$ sudo wget  https://raw.githubusercontent.com/guikcd/aws-kms-workshop/fixes/WebApp.py
 ```
 
 You have downloaded a python application, named "**WebApp.py**", that will be our test Web App.
@@ -103,7 +104,7 @@ Stop the server from running with CTRL+C (maybe twice).
 Download the version of the Web App that **adds Server Side Encryption** and run the server again:
 
 ```
-$  sudo wget https://raw.githubusercontent.com/aws-samples/aws-kms-workshop/master/WebAppEncSSE.py
+$  sudo wget https://raw.githubusercontent.com/guikcd/aws-kms-workshop/fixes/WebAppEncSSE.py
 ```
 
 We are going to need the KeyId of the CMK we pretend to use for the encryption of the files. The CMK we want to use is the one generated with our import material and which alias was "**ImportedCMK**".
@@ -111,7 +112,7 @@ We are going to need the KeyId of the CMK we pretend to use for the encryption o
 Issue the following command to display your working keys and identify the KeyId of "ImportedCMK", in case you don´t find it in your notes.
 
 ```
-$ aws kms list-aliases
+$ aws kms list-aliases --key-id 'your-key-id'
 
 {
     "Aliases": [
@@ -223,7 +224,7 @@ Let's modify the permission of the role assigned to the instance, **allowing it 
 Let's use the console. Open the AWS Console. Navigate to IAM service, left column "Roles" and search for the role currently assigned to the instance: **KMSWorkshop-InstanceInitRole**. 
 
 
-Within the role, locate the policy we attached when working in the second section of the workshop, we named it "**KMSWorkshop-AditionalPermissions**". Click the button "**Edit Policy**". Expand the Actions-Access Level-Write section and remove the check box on "**Decrypt**". Review policy and save it.
+Within the role, locate the policy we attached when working in the second section of the workshop, we named it "**KMSWorkshop-AdditionalPermissions**". Click the button "**Edit Policy**". Expand the Actions-Access Level-Write section and remove the check box on "**Decrypt**". Review policy and save it.
 
 Let's run the server once more. Please remember you need the KeyID again:
 
@@ -484,7 +485,7 @@ For information on the command, please use [this section of the AWS KMS document
 
 
 
-This section of the Workshop is now completed. Please, navigate to [the next Section, Monitoring AWS KMS](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-4-Monitoring-AWS-KMS.md).
+This section of the Workshop is now completed. Please, navigate to [the next Section, Monitoring AWS KMS](Section-4-Monitoring-AWS-KMS.md).
 
 
 

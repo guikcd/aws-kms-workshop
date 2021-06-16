@@ -1,10 +1,10 @@
 # Operating with AWS KMS and CMKs
 
 In this first section we are going to learn the core operations of AWS KMS, that would allow us to go deeper into the service and its best practices. The section has four main areas:
- * [Creating Customer Master Keys (CMK)](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-1-Operating-with-AWS-KMS.md#creating-customer-master-keys-cmk)
- * [Generate CMKs with your own key material](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-1-Operating-with-AWS-KMS.md#generate-cmks-with-your-own-key-material)
- * [Rotating AWS KMS CMKs](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-1-Operating-with-AWS-KMS.md#rotating-AWS-KMS-CMKs)
- * [Deleting AWS KMS CMKs](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-1-Operating-with-AWS-KMS.md#deleting-AWS-KMS-CMKs)
+ * [Creating Customer Master Keys (CMK)](Section-1-Operating-with-AWS-KMS.md#creating-customer-master-keys-cmk)
+ * [Generate CMKs with your own key material](Section-1-Operating-with-AWS-KMS.md#generate-cmks-with-your-own-key-material)
+ * [Rotating AWS KMS CMKs](Section-1-Operating-with-AWS-KMS.md#rotating-AWS-KMS-CMKs)
+ * [Deleting AWS KMS CMKs](Section-1-Operating-with-AWS-KMS.md#deleting-AWS-KMS-CMKs)
 ----
 
 
@@ -78,7 +78,7 @@ Click on the role and then on "**Attach Policies**" button, we are going to prov
 <**Figure-3**>
 
 
-Now, search "**AWSKeyManagement**", and select the policy "**AWSKeyManagementSystemPowerUser**".  That is the policy we are going to use for the instance role. **Please note**, the assigment of KMS Power User permissions is **just** for the initial walk-through in KMS, a typical user might not need the whole set of permissions. Later in the workshop we will work on how to implement more fine grained "Least Privilege" access, according to best practices,  in order to assign appropriate permissions to users and roles into KMS operations.
+Now, search "**AWSKeyManagement**", and select the policy "**AWSKeyManagementServicePowerUser**".  That is the policy we are going to use for the instance role. **Please note**, the assigment of KMS Power User permissions is **just** for the initial walk-through in KMS, a typical user might not need the whole set of permissions. Later in the workshop we will work on how to implement more fine grained "Least Privilege" access, according to best practices,  in order to assign appropriate permissions to users and roles into KMS operations.
 As this point we can review the policy, just by clicking on the small black arrow close to the policy name to expand it.
 
 ![Figure-4](/res/S1F4%20KMSPowerUserPolicy.png)
@@ -295,7 +295,7 @@ Also note the expiration date we have provided for the key material. On that dat
 As usual, replace "**your-key-id**", with the real **KeyId** of the key generated in Step 1 above for external origin.
 
 ```
-$ aws kms import-key-material --key-id your-key-id --encrypted-key-material fileb://WrappedKeyMaterial.bin --import-token fileb://token.bin --expiration-model KEY_MATERIAL_EXPIRES --valid-to 2021-02-01T12:00:00-08:00
+$ aws kms import-key-material --key-id your-key-id --encrypted-key-material fileb://WrappedKeyMaterial.bin --import-token fileb://token.bin --expiration-model KEY_MATERIAL_EXPIRES --valid-to 2022-02-01T12:00:00-08:00
 ```
 
 All going well, the above command must have failed with the following error message:
@@ -349,7 +349,7 @@ The Role now has permissions to import the key material.
 
 Let's try now the command again, this time it will succeed. We have successfully imported our key into AWS KMS. 
 ```
-$ aws kms import-key-material --key-id your-key-id --encrypted-key-material fileb://WrappedKeyMaterial.bin --import-token fileb://token.bin --expiration-model KEY_MATERIAL_EXPIRES --valid-to 2019-09-01T12:00:00-08:00
+$ aws kms import-key-material --key-id your-key-id --encrypted-key-material fileb://WrappedKeyMaterial.bin --import-token fileb://token.bin --expiration-model KEY_MATERIAL_EXPIRES --valid-to 2022-09-01T12:00:00-08:00
 ```
 
 **NOTE:** Depending when you follow this workshop you might need to adjust the time in "**KEY_MATERIAL_EXPIRES --valid-to**" as it can not be more than 365 days from the current date.
@@ -453,7 +453,7 @@ With the CMKs generated with your own key material, automatic rotation is not po
 
 In order to do so, we would need to create a new key with imported key material, as we did with to create the CMK "ImportedCMK" with external origin and then update the alias "**ImportedCMK**". **NOTE:** Timewise, you are **not required** to do it as part of the workshop, as the procedure is already covered.
 
-In case you would like to rotate the CMK created with your own key material, follow the procedure in the section above "[Generate CMK with your own key material](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-1-Operating-with-AWS-KMS.md#generate-cmks-with-your-own-key-material)". 
+In case you would like to rotate the CMK created with your own key material, follow the procedure in the section above "[Generate CMK with your own key material](Section-1-Operating-with-AWS-KMS.md#generate-cmks-with-your-own-key-material)". 
 Once you have created a new CMK with you new imported key material, update the alias "**ImportedCMK**" to point to the new key you have provided. Replace **KeyID** in command below with the KeyID of your newly created CMK.
 
 ```
@@ -505,6 +505,6 @@ If for any reason you delete the key we generated with our own key material "**I
 $ aws kms delete-imported-key-material --key-id  your-key-id.   
 ```
 
-Congratulations, you have now completed this section of the workshop. You can now go to the second section of the workshop: [Encryption with AWS KMS](https://github.com/aws-samples/aws-kms-workshop/blob/master/Section-2-Encryption-with-AWS-KMS.md)
+Congratulations, you have now completed this section of the workshop. You can now go to the second section of the workshop: [Encryption with AWS KMS](Section-2-Encryption-with-AWS-KMS.md)
 
 
